@@ -22,35 +22,35 @@ const createAndSavePerson = (done) => {
     favoriteFoods: ['pizza', 'feijoada']
   })
 
-  person.save(function (error, data){
+  person.save(function(error, data) {
     if (error) return done(error);
     done(null, data);
   })
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create(arrayOfPeople, function (error, data){
+  Person.create(arrayOfPeople, function(error, data) {
     if (error) return done(error);
     done(null, data);
   });
 };
 
 const findPeopleByName = (personName, done) => {
-  Person.find({name: personName}, function (error, data){
+  Person.find({ name: personName }, function(error, data) {
     if (error) return done(error);
     done(null, data);
   })
 };
 
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods: food}, function (error, data){
+  Person.findOne({ favoriteFoods: food }, function(error, data) {
     if (error) return done(error);
     done(null, data);
   })
 };
 
 const findPersonById = (personId, done) => {
-  Person.findById(personId, function (error, data){
+  Person.findById(personId, function(error, data) {
     if (error) return done(error);
     done(null, data);
   })
@@ -58,8 +58,14 @@ const findPersonById = (personId, done) => {
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
+  Person.findById(personId, function(error, data) {
+    data.favoriteFoods.push(foodToAdd);
 
-  done(null /*, data*/);
+    data.save(function (error, data){
+      if (error) return done(error);
+      done(null, data);
+    });
+  });
 };
 
 const findAndUpdate = (personName, done) => {
