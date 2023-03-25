@@ -61,7 +61,7 @@ const findEditThenSave = (personId, done) => {
   Person.findById(personId, function(error, data) {
     data.favoriteFoods.push(foodToAdd);
 
-    data.save(function (error, data){
+    data.save(function(error, data) {
       if (error) return done(error);
       done(null, data);
     });
@@ -73,18 +73,21 @@ const findAndUpdate = (personName, done) => {
 
   Person
     .findOneAndUpdate(
-      { name: personName }, 
-      { $set: { age: ageToSet }}, 
-      { new: true }, 
-      function (error, data){
-        if(error) return done(error)
+      { name: personName },
+      { $set: { age: ageToSet } },
+      { new: true },
+      function(error, data) {
+        if (error) return done(error)
         done(null, data)
       }
     );
 };
 
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndRemove(personId, function(error, data) {
+    if (error) return done(error);
+    done(null, data);
+  });
 };
 
 const removeManyPeople = (done) => {
