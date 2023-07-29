@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://rrbooondev:mKtYI8nWARp6sHoc@cluster0.isb7eem.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("", { useNewUrlParser: true, useUnifiedTopology: true })
 
 const schema = new mongoose.Schema({
   name: {
